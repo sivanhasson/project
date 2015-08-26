@@ -16,29 +16,12 @@ int depth;
 
 
 int main(){
-	/*mmGS_t* node = NULL;*/
 	init_board(GAME_BOARD.board);
 
 	GAME_BOARD.numberBK = 0;
 	GAME_BOARD.numberBM = 20;
 	GAME_BOARD.numberWK = 0;
 	GAME_BOARD.numberWM = 20;
-
-	/*copyGameBoard(node->boardState.board, GAME_BOARD.board);
-	node->boardState.numberBK = 0;
-	node->boardState.numberBM = 0;
-	node->boardState.numberWK = 0;
-	node->boardState.numberWM = 0;
-	node->score = 0;
-	print_board(node->boardState.board);
-	printf("%d\n",node->score);
-	if (node == NULL){
-		printf("free node");
-	}
-	else{
-		free(node);
-	}
-	*/
 
 	print_message(WELCOME_TO_DRAUGHTS);
 	SettingStateIsOn = 1;
@@ -179,8 +162,8 @@ void userSettingCommand(char* userInput)		/*parsing user settings command and ca
 	}
 	else if (memcmp(userInput, "set", strlen("set")) == 0){    /* - add the set parsing*/
 
-
-
+			
+			
 
 			xValue= strtok(userInput, " <,>");  /*will take the "set"*/
 			xValue= strtok(NULL, " <,>");     /*will take the col*/
@@ -209,7 +192,7 @@ void userSettingCommand(char* userInput)		/*parsing user settings command and ca
 		start(&GAME_BOARD);
 	}
 
-}
+}				
 
 
 int miniDepth(int x){
@@ -726,11 +709,13 @@ int checkIfLegalMove(move_t userMove){      /*(checked before if the position is
 					}
 				return 1;  /*the step is legal*/
 				}
+				else {
+					return 1;
+				}
 			}
 			else if (userMove.next->next == NULL){  /*after the non-eating step, no more step*/
 				return 1;
 			}
-			return 0;
 		}
 	}
 	return 0;
@@ -858,8 +843,8 @@ int legalKingMove(move_t *move){   /*will return 0 if not legal, 1 if legal but 
 	currLoc = move->curr;
 	afterLoc = move->next->curr;
 
-	startCol = currLoc.col;
-	startRow = currLoc.row;
+	startCol = (int) currLoc.col -97;
+	startRow = currLoc.row -1;
 
 	distance = abs(currLoc.row - afterLoc.row);
 
@@ -1273,7 +1258,7 @@ char getDiscByLocationInGameBoard(loc_t loc){
 	char discInPlace;
 
 	rowLoc = loc.row -1;
-	colLoc = loc.col -97;
+	colLoc = loc.col -97;																
 
 	discInPlace = GAME_BOARD.board[rowLoc][colLoc];
 
@@ -1452,7 +1437,7 @@ struct possibleMove* getAllPossibleMoves(char board[BOARD_SIZE][BOARD_SIZE], int
 
 						getEatingMove(board, firstStep, firstStep, &(firstStep->move) , 0, player);
 
-						if (firstStep->next == NULL){  /*no eating move*/
+						if (firstStep->next == NULL){  /*no eating move*/							
 							getRegularMove(board,firstStep, 0, player);
 
 						}
@@ -2077,19 +2062,26 @@ int stopConditions(loc_t* result ,move_t* currMove, int player){
 	move_t* tmpMove = 0;
 	tmpMove = currMove;
 
-	if(result == NULL){										/*no eating move that way, last step of that recursion*/
+
+	if(result == NULL){	/*no eating move that way, last step of that recursion*/ /*no 1 happened*/
 		return 1;
+	}
+
+	else if (tmpMove->next == NULL){   /*this is the currLoc. no check if in the end of the board*/
+		return 0;
 	}
 
 	while(tmpMove->next != NULL){
 		tmpMove = tmpMove->next;
 	}
-	if((player == whitePlayer) && tmpMove->curr.row == 10){	/*white player reached to the end of board*/
+
+	if((player == whitePlayer) && (tmpMove->curr.row == 10)){	/*white player reached to the end of board*/
 		return 1;
 	}
-	else if((player != whitePlayer) && tmpMove->curr.row == 1){	/*black player reached to the end of board*/
+	else if((player != whitePlayer) && (tmpMove->curr.row == 1)){	/*black player reached to the end of board*/
 		return 1;
 	}
+
 	return 0;
 }
 
@@ -2269,7 +2261,7 @@ void getChildren(mmGS_t* fatherNode, possibleM_t* possibleMove, mmGS_t** array){
 
 void freeMT(move_t* move){
 	move_t* tmpMove = 0;
-
+	
 	tmpMove = move->next;
 	if (tmpMove == NULL){
 		free(move);
