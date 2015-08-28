@@ -1,4 +1,4 @@
-#include "Draughts.h"
+#include "Chess.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,22 +14,53 @@ struct boardState GAME_BOARD;
 int depth;
 
 
-
 int main(){
 	init_board(GAME_BOARD.board);
+	clear(GAME_BOARD);
 
-	GAME_BOARD.numberBK = 0;
-	GAME_BOARD.numberBM = 20;
-	GAME_BOARD.numberWK = 0;
-	GAME_BOARD.numberWM = 20;
+	/*
+	 * check the getAllPossibleMoves function:
+	GAME_BOARD.board[0][7] = BLACK_R;
+	GAME_BOARD.board[4][7] = BLACK_R;
+	GAME_BOARD.board[6][7] = BLACK_K;
+	GAME_BOARD.board[1][6] = BLACK_B;
+	GAME_BOARD.board[2][6] = BLACK_Q;
+	GAME_BOARD.board[3][6] = BLACK_N;
+	GAME_BOARD.board[5][6] = BLACK_P;
+	GAME_BOARD.board[7][6] = BLACK_P;
+	GAME_BOARD.board[0][5] = BLACK_P;
+	GAME_BOARD.board[1][5] = BLACK_P;
+	GAME_BOARD.board[2][5] = BLACK_N;
+	GAME_BOARD.board[3][5] = BLACK_P;
+	GAME_BOARD.board[4][5] = BLACK_P;
+	GAME_BOARD.board[6][5] = BLACK_P;
 
-	print_message(WELCOME_TO_DRAUGHTS);
-	SettingStateIsOn = 1;
-	SettingState(&GAME_BOARD);
+	GAME_BOARD.board[6][4] = WHITE_P;
+	GAME_BOARD.board[0][3] = WHITE_P;
+	GAME_BOARD.board[3][3] = WHITE_N;
+	GAME_BOARD.board[4][3] = WHITE_P;
+	GAME_BOARD.board[5][3] = WHITE_P;
+	GAME_BOARD.board[2][2] = WHITE_N;
+	GAME_BOARD.board[7][2] = WHITE_R;
+	GAME_BOARD.board[1][1] = WHITE_P;
+	GAME_BOARD.board[2][1] = WHITE_P;
+	GAME_BOARD.board[5][1] = WHITE_Q;
+	GAME_BOARD.board[6][1] = WHITE_B;
+	GAME_BOARD.board[7][1] = WHITE_P;
+	GAME_BOARD.board[5][0] = WHITE_R;
+	GAME_BOARD.board[7][0] = WHITE_K;
 
-	if (gameIsOn){
-		gameState();
-	}
+	print_board(GAME_BOARD.board);
+
+	printPossibleMoves(getAllPossibleMoves(GAME_BOARD.board, 0));
+	*/
+	//print_message(WELCOME_TO_DRAUGHTS);
+	//SettingStateIsOn = 1;
+	//SettingState(&GAME_BOARD);
+
+	//if (gameIsOn){
+	//	gameState();
+	//}
 
 	return 0;
 }
@@ -69,7 +100,7 @@ void computerTurn(){
 	nextCompTurn = minimax(&root, depth, 0);
 	changeBoardByMove(&GAME_BOARD,nextCompTurn->move);
 
-	print_message(COMPUTER_MOVE);
+	//print_message(COMPUTER_MOVE);  TODO
 	printMove(&(nextCompTurn->move));
 	print_board(GAME_BOARD.board);
 
@@ -99,7 +130,7 @@ void userTurn()	{			/*will print "enter your move", and will send to userCommand
 		quit();
 	}
 	initArrChar(userInput, INPUT_LEN);
-	print_message(ENTER_YOUR_MOVE);
+	//print_message(ENTER_YOUR_MOVE); TODO
 	userInput = getInput(stdin, INPUT_LEN);
 	userCommand(userInput);
 	free(userInput);
@@ -162,8 +193,8 @@ void userSettingCommand(char* userInput)		/*parsing user settings command and ca
 	}
 	else if (memcmp(userInput, "set", strlen("set")) == 0){    /* - add the set parsing*/
 
-			
-			
+
+
 
 			xValue= strtok(userInput, " <,>");  /*will take the "set"*/
 			xValue= strtok(NULL, " <,>");     /*will take the col*/
@@ -192,7 +223,7 @@ void userSettingCommand(char* userInput)		/*parsing user settings command and ca
 		start(&GAME_BOARD);
 	}
 
-}				
+}
 
 
 int miniDepth(int x){
@@ -533,7 +564,7 @@ void checkMoveAndSet(char* moveCommand){      /*will get the path, without "move
 		theLocContainTheColor = checkContainTheColor(userMove);    /*check if position <x,y> (the first) contain a disc of the user's color */
 
 		if (!theLocContainTheColor){                    /*<x,y> not contain user's disc*/
-			print_message (NO_DICS);
+			print_message (DOES_NOT_CONTAIN);
 			freeMT(userMove.next);
 			userTurn();   /*go back to the userTurn function*/
 		}
@@ -632,7 +663,7 @@ int checkPosition(move_t userMove){
 }
 
 int validLoc(char col, int row){
-	if ((row > 10) || (row < 1) || (col < 'a') || (col > 'j')){
+	if ((row > 8) || (row < 1) || (col < 'a') || (col > 'h')){
 				return 0;
 			}
 	return 1;
@@ -1258,7 +1289,7 @@ char getDiscByLocationInGameBoard(loc_t loc){
 	char discInPlace;
 
 	rowLoc = loc.row -1;
-	colLoc = loc.col -97;																
+	colLoc = loc.col -97;
 
 	discInPlace = GAME_BOARD.board[rowLoc][colLoc];
 
@@ -1386,7 +1417,7 @@ void init_board(char board[BOARD_SIZE][BOARD_SIZE]){
 struct possibleMove* getAllPossibleMoves(char board[BOARD_SIZE][BOARD_SIZE], int player){
 
 	int i,j;
-	char playerMan, playerKing;
+	int playerColor;
 
 	struct location currLoc;
 	struct possibleMove* firstEmptyNode = 0;
@@ -1406,69 +1437,70 @@ struct possibleMove* getAllPossibleMoves(char board[BOARD_SIZE][BOARD_SIZE], int
 	pointTmpMove = firstEmptyNode;				/*can Delete because initiation is doubled and used only at the end of func*/
 
 
-	if (player == whitePlayer){
-		playerMan = WHITE_M;
-		playerKing = WHITE_K;
-	}
-	else{
-		playerMan = BLACK_M;
-		playerKing = BLACK_K;
-	}
+	playerColor = getPlayerColor(player);
 
 
 	for (i = 0; i < BOARD_SIZE; i++){
 		for (j = 0; j < BOARD_SIZE; j++){
-			if ((i + j) % 2 == 0){
-				if ((board[i][j] == playerMan) || (board[i][j] == playerKing)){
-						currLoc.col = (char) i +97;
-						currLoc.row = j +1;
+			if (isPlayer(board[i][j], playerColor)){
+				currLoc.col = (char) i +97;
+				currLoc.row = j +1;
 
-						/*Setting first position*/
-						firstStep = (struct possibleMove*)malloc(sizeof(struct possibleMove)); /*in use in the linked list*/
-						if(!firstStep){
-							perror_message("getAllPossibleMoves");
-							quit();
-						}
+				/*Setting first position*/
+				firstStep = (struct possibleMove*)malloc(sizeof(struct possibleMove)); /*in use in the linked list*/
+				if(!firstStep){
+					perror_message("getAllPossibleMoves");
+					quit();
+				}
 
-						posMovInitiation(firstStep);
-						firstStep->move.curr = currLoc;
+				posMovInitiation(firstStep);
+				firstStep->move.curr = currLoc;
 
-					if (board[i][j] == playerMan){
 
-						getEatingMove(board, firstStep, firstStep, &(firstStep->move) , 0, player);
+				if (isPawn(board[i][j])){
+					getPawnMoves(board, firstStep, player);
+				}
 
-						if (firstStep->next == NULL){  /*no eating move*/							
-							getRegularMove(board,firstStep, 0, player);
+				else if (isBishop(board[i][j])){
+					getBishopMoves(board, firstStep, player);
+				}
 
-						}
+				else if (isKnight(board[i][j])){
+					getKnightMoves(board, firstStep, player);
+				}
+
+				else if (isRook(board[i][j])){
+					getRookMoves(board, firstStep, player);
+				}
+
+				else if (isQueen(board[i][j])){
+					getQueenMoves(board, firstStep, player);
+				}
+
+				else {   //it's a king
+					getKingMoves(board, firstStep, player);
+				}
+
+
+				if (firstStep->next != NULL){  /*there is at least one move*/
+					if (firstEmptyNode->next == NULL){
+						firstEmptyNode->next = firstStep->next;
 					}
-					else {    /*it's a king*/
-						getEatingMove(board, firstStep, firstStep, &(firstStep->move) , 1, player);
-						if (firstStep->next == NULL){  /*no eating move*/
-							getRegularMove(board,firstStep, 1, player);
+					else{                             /*add to the big moves linked-list*/
+						pointTmpMove = firstStep;
+						while (pointTmpMove->next != NULL){
+							pointTmpMove = pointTmpMove->next;
 						}
-					}
-
-					if (firstStep->next != NULL){  /*there are eating or regular moves*/
-						if (firstEmptyNode->next == NULL){
-							firstEmptyNode->next = firstStep->next;
-						}
-						else{                             /*add to the big moves linked-list*/
-							pointTmpMove = firstStep;
-							while (pointTmpMove->next != NULL){
-								pointTmpMove = pointTmpMove->next;
-							}
-							pointTmpMove->next = firstEmptyNode->next;
-							firstEmptyNode->next = firstStep;
-						}
+						pointTmpMove->next = firstEmptyNode->next;
+						firstEmptyNode->next = firstStep->next;
 					}
 				}
 			}
 		}
 	}
 
-	returnTheBiggest(firstEmptyNode);   /*will remove the empty*/
-	result =  firstEmptyNode->next;
+	//addCastlingMove(board,firstEmptyNode,player);  //TODO
+	result = firstEmptyNode->next;
 	firstEmptyNode->next = NULL;
 	freePM(firstEmptyNode);
 	return result;			 /*if there isn't a possible move, will return NULL*/ /*free result from the calling function*/
@@ -1476,62 +1508,629 @@ struct possibleMove* getAllPossibleMoves(char board[BOARD_SIZE][BOARD_SIZE], int
 }
 
 
-void getEatingMove(char board[BOARD_SIZE][BOARD_SIZE],struct possibleMove* firstStep, struct possibleMove* currMove, struct move* lastStep ,int kingPlayer, int player){
+void getPawnMoves(char board[BOARD_SIZE][BOARD_SIZE],possibleM_t* firstStep, int player){  //HAYAL
+	int playerColor;
+	loc_t tmpNewLoc;
 
-	struct location *result = 0;
-	struct possibleMove *currPossibleMove = 0;
+	locInitiation(&(tmpNewLoc));
 
-	struct move *currStep = 0;
+	playerColor = getPlayerColor(player);
 
-
-	int i, alreadyEntered = 0;
-
-	for(i = 0; i < 4; ++i){
-
-		if (!kingPlayer){
-			result = manCanEatFromLoc(board,&(lastStep->curr), player, i);
-		}
-
-		else{
-			result = kingCanEatFromLoc(board, &(lastStep->curr), player, i);
-		}
-
-
-		if (stopConditions(result, &(currMove->move), player)){   /*stop conditions are held*/
-			if ((!alreadyEntered) && (currMove->move.next != NULL)){  /*there is at least one eat and none of the iteration (1-4) didn't add it*/
-
-				currMove->next = firstStep->next;
-				firstStep->next = currMove;
-				alreadyEntered = 1;
-			}
-
-		}
-
-		else if (result != NULL){
-
-			if (beenBefore(&(currMove->move), result, kingPlayer)){   /*mean: we just come from this loc, no need that result*/
-				free(result);
-			}
-			else{                                            /*there is an eating move that way. continue with recur*/
-				/*copying the sub-list until new position*/
-				currPossibleMove = (struct possibleMove*)malloc(sizeof(struct possibleMove)); /*in use in the linked list*/
-				if(!currPossibleMove){
-					perror_message("getEatingMove");
-					quit();
-				}
-				posMovInitiation(currPossibleMove);
-				currPossibleMove = copyPossibleMove(currMove);
-				currStep = setNewStep(&(currPossibleMove->move), result);
-
-				currPossibleMove->eatCnt += 1;
-
-				getEatingMove(board, firstStep, currPossibleMove, currStep , 0, player);
-			}
-
-		}
+	if (whitePlayer == player){ /*move UP. add only 0,1,4 steps*/
+		tmpNewLoc.row = firstStep->move.curr.row +1;    /*+*/
+	}
+	else{                         /*black. move DOWN. add only 2,3,6 steps*/
+		tmpNewLoc.row = firstStep->move.curr.row -1;    /*-*/
 	}
 
+	tmpNewLoc.col = (char) firstStep->move.curr.col; /*will go up or down -- regular step*/
+
+	if ((validLoc((char)tmpNewLoc.col, tmpNewLoc.row)) && (board[tmpNewLoc.col-97][tmpNewLoc.row-1] == EMPTY)){   /*that step in the board and empty*/
+
+		addNewStep(firstStep, tmpNewLoc);  /*add regular step*/
+	}
+
+	tmpNewLoc.col = (char) firstStep->move.curr.col +1; /*check if can eat right*/
+
+	if ((validLoc((char)tmpNewLoc.col, tmpNewLoc.row)) && (isOtherPlayer(board[tmpNewLoc.col-97][tmpNewLoc.row-1], playerColor))){   /*that place in the board contains piece to eat*/
+
+		addNewStep(firstStep, tmpNewLoc);   /*add right eat step*/
+	}
+
+	tmpNewLoc.col = (char) firstStep->move.curr.col - 1; /*check if can eat left*/
+	if ((validLoc((char)tmpNewLoc.col, tmpNewLoc.row)) && (isOtherPlayer(board[tmpNewLoc.col-97][tmpNewLoc.row-1], playerColor))){   /*that place in the board contains piece to eat*/
+
+		addNewStep(firstStep, tmpNewLoc);  /*add left eat step*/
+	}
 }
+
+
+void getBishopMoves(char board[BOARD_SIZE][BOARD_SIZE],possibleM_t* firstStep, int player){   //RATZ
+	int i, j;
+	int playerColor;
+	loc_t tmpNewLoc;
+	loc_t *currLoc = NULL;
+
+	locInitiation(&(tmpNewLoc));
+
+	currLoc = &(firstStep->move.curr);
+
+	playerColor = getPlayerColor(player);
+
+	/*add all the 4, with every possible length*/
+	for (i=0; i<4; ++i){
+
+		if (i == 0){
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col + j), currLoc->row + j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col + j -97][currLoc->row + j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col + j);
+					tmpNewLoc.row = currLoc->row + j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col + j -97][currLoc->row + j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else if (i == 1){
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col - j), currLoc->row + j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col - j -97][currLoc->row + j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col - j);
+					tmpNewLoc.row = currLoc->row + j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col - j -97][currLoc->row + j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else if (i == 2){
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col + j), currLoc->row - j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col + j -97][currLoc->row - j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col + j);
+					tmpNewLoc.row = currLoc->row - j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col + j -97][currLoc->row - j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else{  /*i = 3*/
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col - j), currLoc->row - j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col - j -97][currLoc->row - j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col - j);
+					tmpNewLoc.row = currLoc->row - j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col - j -97][currLoc->row - j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+	}
+}
+
+
+void getRookMoves(char board[BOARD_SIZE][BOARD_SIZE],possibleM_t* firstStep, int player){   //TSARIACH
+	int i, j;
+	int playerColor;
+	loc_t tmpNewLoc;
+	loc_t *currLoc = NULL;
+
+	locInitiation(&(tmpNewLoc));
+
+	currLoc = &(firstStep->move.curr);
+
+	playerColor = getPlayerColor(player);
+
+	/*add all the 4, with every possible length*/
+	for (i=4; i<8; ++i){
+
+		if (i == 4){  //UP
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col), currLoc->row + j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col -97][currLoc->row + j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col);
+					tmpNewLoc.row = currLoc->row + j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col -97][currLoc->row + j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else if (i == 5){   //LEFT
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col - j), currLoc->row)
+						&& (emptyOrEatLoc(board[(int)currLoc->col - j -97][currLoc->row -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col - j);
+					tmpNewLoc.row = currLoc->row;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col - j -97][currLoc->row -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else if (i == 6){   //DOWN
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col), currLoc->row - j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col -97][currLoc->row - j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col);
+					tmpNewLoc.row = currLoc->row - j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col -97][currLoc->row - j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else{  /*i = 7. RIGHT*/
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col + j), currLoc->row)
+						&& (emptyOrEatLoc(board[(int)currLoc->col + j -97][currLoc->row -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col + j);
+					tmpNewLoc.row = currLoc->row;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col + j -97][currLoc->row -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+	}
+}
+
+
+void getKnightMoves(char board[BOARD_SIZE][BOARD_SIZE],possibleM_t* firstStep, int player){  //PARASH
+	int i;
+	loc_t tmpNewLoc;
+	loc_t *currLoc = NULL;
+
+	locInitiation(&(tmpNewLoc));
+
+	currLoc = &(firstStep->move.curr);
+
+
+	/*add all the 4, with every possible length*/
+	for (i=0; i<4; ++i){
+
+		if (i == 0){
+			if (validLoc((char)(currLoc->col + 1), currLoc->row + 2)
+					&& (emptyOrEatLoc(board[(int)currLoc->col + 1 -97][currLoc->row + 2 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col + 1);
+				tmpNewLoc.row = currLoc->row + 2;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+			if (validLoc((char)(currLoc->col + 2), currLoc->row + 1)
+					&& (emptyOrEatLoc(board[(int)currLoc->col + 2 -97][currLoc->row + 1 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col + 2);
+				tmpNewLoc.row = currLoc->row + 1;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+
+		else if (i == 1){
+			if (validLoc((char)(currLoc->col - 1), currLoc->row + 2)
+					&& (emptyOrEatLoc(board[(int)currLoc->col - 1 -97][currLoc->row + 2 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col - 1);
+				tmpNewLoc.row = currLoc->row + 2;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+			if (validLoc((char)(currLoc->col - 2), currLoc->row + 1)
+					&& (emptyOrEatLoc(board[(int)currLoc->col - 2 -97][currLoc->row + 1 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col - 2);
+				tmpNewLoc.row = currLoc->row + 1;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+
+		else if (i == 2){
+			if (validLoc((char)(currLoc->col + 1), currLoc->row - 2)
+					&& (emptyOrEatLoc(board[(int)currLoc->col + 1 -97][currLoc->row - 2 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col + 1);
+				tmpNewLoc.row = currLoc->row - 2;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+			if (validLoc((char)(currLoc->col + 2), currLoc->row - 1)
+					&& (emptyOrEatLoc(board[(int)currLoc->col + 2 -97][currLoc->row - 1 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col + 2);
+				tmpNewLoc.row = currLoc->row - 1;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+
+		else{  /*i = 3*/
+			if (validLoc((char)(currLoc->col - 1), currLoc->row - 2)
+					&& (emptyOrEatLoc(board[(int)currLoc->col - 1 -97][currLoc->row - 2 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col - 1);
+				tmpNewLoc.row = currLoc->row - 2;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+			if (validLoc((char)(currLoc->col - 2), currLoc->row - 1)
+					&& (emptyOrEatLoc(board[(int)currLoc->col - 2 -97][currLoc->row - 1 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col - 2);
+				tmpNewLoc.row = currLoc->row - 1;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+	}
+}
+
+void getQueenMoves(char board[BOARD_SIZE][BOARD_SIZE],possibleM_t* firstStep, int player){   //QUEEN
+	int i, j;
+	int playerColor;
+	loc_t tmpNewLoc;
+	loc_t *currLoc = NULL;
+
+	locInitiation(&(tmpNewLoc));
+
+	currLoc = &(firstStep->move.curr);
+
+	playerColor = getPlayerColor(player);
+
+	/*add all the 4, with every possible length*/
+	for (i=0; i<8; ++i){
+
+		if (i == 0){
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col + j), currLoc->row + j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col + j -97][currLoc->row + j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col + j);
+					tmpNewLoc.row = currLoc->row + j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col + j -97][currLoc->row + j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else if (i == 1){
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col - j), currLoc->row + j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col - j -97][currLoc->row + j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col - j);
+					tmpNewLoc.row = currLoc->row + j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col - j -97][currLoc->row + j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else if (i == 2){
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col + j), currLoc->row - j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col + j -97][currLoc->row - j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col + j);
+					tmpNewLoc.row = currLoc->row - j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col + j -97][currLoc->row - j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else if (i==3){
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col - j), currLoc->row - j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col - j -97][currLoc->row - j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col - j);
+					tmpNewLoc.row = currLoc->row - j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col - j -97][currLoc->row - j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else if (i == 4){  //UP
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col), currLoc->row + j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col -97][currLoc->row + j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col);
+					tmpNewLoc.row = currLoc->row + j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col -97][currLoc->row + j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else if (i == 5){   //LEFT
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col - j), currLoc->row)
+						&& (emptyOrEatLoc(board[(int)currLoc->col - j -97][currLoc->row -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col - j);
+					tmpNewLoc.row = currLoc->row;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col - j -97][currLoc->row -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else if (i == 6){   //DOWN
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col), currLoc->row - j)
+						&& (emptyOrEatLoc(board[(int)currLoc->col -97][currLoc->row - j -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col);
+					tmpNewLoc.row = currLoc->row - j;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col -97][currLoc->row - j -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+
+		else{  /*i = 7. RIGHT*/
+			for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
+
+				if (validLoc((char)(currLoc->col + j), currLoc->row)
+						&& (emptyOrEatLoc(board[(int)currLoc->col + j -97][currLoc->row -1], player))){  /*check validation of the loc*/
+
+					tmpNewLoc.col = (char)(currLoc->col + j);
+					tmpNewLoc.row = currLoc->row;
+					addNewStep(firstStep, tmpNewLoc);
+				}
+				else{  /*do not continue to add new move from that loc*/
+					break;
+				}
+				if (isOtherPlayer(board[(int)currLoc->col + j -97][currLoc->row -1], playerColor)){  //because we got to otherPlayer and it can't jump
+					break;
+				}
+			}
+		}
+	}
+}
+
+
+void getKingMoves(char board[BOARD_SIZE][BOARD_SIZE],possibleM_t* firstStep, int player){   //KING
+	int i;
+	loc_t tmpNewLoc;
+	loc_t *currLoc = NULL;
+
+	locInitiation(&(tmpNewLoc));
+
+	currLoc = &(firstStep->move.curr);
+
+
+	/*add all the 4, with every possible length*/
+	for (i=0; i<8; ++i){
+
+		if (i == 0){
+			if (validLoc((char)(currLoc->col + 1), currLoc->row + 1)
+					&& (emptyOrEatLoc(board[(int)currLoc->col + 1 -97][currLoc->row + 1 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col + 1);
+				tmpNewLoc.row = currLoc->row + 1;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+
+		else if (i == 1){
+			if (validLoc((char)(currLoc->col - 1), currLoc->row + 1)
+					&& (emptyOrEatLoc(board[(int)currLoc->col - 1 -97][currLoc->row + 1 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col - 1);
+				tmpNewLoc.row = currLoc->row + 1;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+
+		else if (i == 2){
+			if (validLoc((char)(currLoc->col + 1), currLoc->row - 1)
+					&& (emptyOrEatLoc(board[(int)currLoc->col + 1 -97][currLoc->row - 1 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col + 1);
+				tmpNewLoc.row = currLoc->row - 1;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+
+		else if (i==3){
+			if (validLoc((char)(currLoc->col - 1), currLoc->row - 1)
+					&& (emptyOrEatLoc(board[(int)currLoc->col - 1 -97][currLoc->row - 1 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col - 1);
+				tmpNewLoc.row = currLoc->row - 1;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+
+		else if (i == 4){  //UP
+			if (validLoc((char)(currLoc->col), currLoc->row + 1)
+					&& (emptyOrEatLoc(board[(int)currLoc->col -97][currLoc->row + 1 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col);
+				tmpNewLoc.row = currLoc->row + 1;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+
+		else if (i == 5){   //LEFT
+			if (validLoc((char)(currLoc->col - 1), currLoc->row)
+					&& (emptyOrEatLoc(board[(int)currLoc->col - 1 -97][currLoc->row -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col - 1);
+				tmpNewLoc.row = currLoc->row;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+
+		else if (i == 6){   //DOWN
+			if (validLoc((char)(currLoc->col), currLoc->row - 1)
+					&& (emptyOrEatLoc(board[(int)currLoc->col -97][currLoc->row - 1 -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col);
+				tmpNewLoc.row = currLoc->row - 1;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+
+		else{  /*i = 7. RIGHT*/
+			if (validLoc((char)(currLoc->col + 1), currLoc->row)
+					&& (emptyOrEatLoc(board[(int)currLoc->col + 1 -97][currLoc->row -1], player))){  /*check validation of the loc*/
+
+				tmpNewLoc.col = (char)(currLoc->col + 1);
+				tmpNewLoc.row = currLoc->row;
+				addNewStep(firstStep, tmpNewLoc);
+			}
+		}
+	}
+}
+
+
+int emptyOrEatLoc(char piece, int player){
+	int playerColor;
+
+	playerColor = getPlayerColor(player);
+
+	if (piece == EMPTY){     //the square is empty
+		return 1;
+	}
+
+	else if (isOtherPlayer(piece, playerColor)){   //cat eat
+		return 1;
+	}
+
+	return 0;
+}
+
+
+void addNewStep(possibleM_t* firstStep, loc_t loc){
+
+	possibleM_t* newStep = NULL;
+	move_t* newMove = NULL;
+
+	newStep = (possibleM_t*)malloc(sizeof(possibleM_t));	/*in use with the linked list*/
+	if(!newStep){
+		perror_message("addNewStep");
+		quit();
+	}
+	posMovInitiation(newStep);
+
+	newStep = copyPossibleMove(firstStep);
+	newMove = (struct move*)malloc(sizeof(struct move));					/*in use with the linked list*/
+	if(!newMove){
+		perror_message("addNewStep");
+		quit();
+	}
+
+	moveInitiation(newMove);
+	newMove->curr = loc;   /*new move have the new Loc*/
+	newMove->castling = 0;   /*a castling move won't be added here*/
+
+	newStep->move.next = newMove;   /*newStep have the new move*/
+
+	//newStep->check = isContainsCheck(newMove);                            /*TODO: WRITE THAT FUNCTION*/
+
+	newStep->next = firstStep->next;  /*connect the newStep to the list*/
+	firstStep->next = newStep;
+}
+
+
 
 /*BEEN BEFORE*/
 
@@ -1629,7 +2228,7 @@ struct possibleMove* copyPossibleMove(struct possibleMove* old)	/*copy the sub-l
 	posMovInitiation(newPossibleMove);
 
 	/*start copy the old to the new*/
-	newPossibleMove->eatCnt = old->eatCnt;
+	//newPossibleMove->eatCnt = old->eatCnt;
 	newPossibleMove->move = old->move;
 
 	/*declare the pointers*/
@@ -1680,43 +2279,6 @@ struct move* setNewStep(struct move* move, struct location* loc){  /*will get a 
 }
 
 
-void returnTheBiggest(struct possibleMove* first){
-	struct possibleMove *tmpMove = NULL;
-	struct possibleMove *beforeTmpMove = NULL;
-	struct possibleMove *needToFree = NULL;
-
-	int maxCnt = 0;
-
-	tmpMove = first;
-
-	while (tmpMove != NULL){
-
-		if (tmpMove->eatCnt > maxCnt){
-			maxCnt = tmpMove->eatCnt;
-		}
-		tmpMove = tmpMove->next;
-	}
-
-	beforeTmpMove = first;
-	tmpMove = first->next;
-
-
-	while (tmpMove != NULL){			/*What about the case that beforeTmpMove.eatCnt > maxCnt?*/
-
-		if((tmpMove->eatCnt < maxCnt) || (tmpMove->move.next == NULL)){
-			needToFree = tmpMove;
-			beforeTmpMove->next = tmpMove->next;
-			tmpMove = beforeTmpMove->next;
-			needToFree->next = 0;
-			free(needToFree);
-		}
-		else{
-			beforeTmpMove = tmpMove;
-			tmpMove = tmpMove->next;
-		}
-	}
-}
-
 
 
 
@@ -1736,14 +2298,14 @@ void getRegularMove(char board[BOARD_SIZE][BOARD_SIZE], struct possibleMove* fir
 		for (i=0; i<4; ++i){
 
 			if (i == 0){
-				for(j = 1; j < BOARD_SIZE; ++j){    	/*check sintax and initiation*/
+				for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
 
 					if (validLoc((char)(currLoc->col + j), currLoc->row + j)
 							&& (board[(int)currLoc->col + j -97][currLoc->row + j -1] == EMPTY)){  /*check validation of the loc*/
 
 						tmpNewLoc.col = (char)(currLoc->col + j);
 						tmpNewLoc.row = currLoc->row + j;
-						addNewRegularStep(firstStep, tmpNewLoc);
+						addNewStep(firstStep, tmpNewLoc);
 					}
 					else{  /*do not continue to add new move from that loc*/
 						break;
@@ -1752,14 +2314,14 @@ void getRegularMove(char board[BOARD_SIZE][BOARD_SIZE], struct possibleMove* fir
 			}
 
 			else if (i == 1){
-				for(j = 1; j < BOARD_SIZE; ++j){    	/*check sintax and initiation*/
+				for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
 
 					if (validLoc((char)(currLoc->col - j), currLoc->row + j)
 							&& (board[(int)currLoc->col - j -97][currLoc->row + j -1] == EMPTY)){  /*check validation of the loc*/
 
 						tmpNewLoc.col = (char)(currLoc->col - j);
 						tmpNewLoc.row = currLoc->row + j;
-						addNewRegularStep(firstStep, tmpNewLoc);
+						addNewStep(firstStep, tmpNewLoc);
 					}
 					else{  /*do not continue to add new move from that loc*/
 						break;
@@ -1768,14 +2330,14 @@ void getRegularMove(char board[BOARD_SIZE][BOARD_SIZE], struct possibleMove* fir
 			}
 
 			else if (i == 2){
-				for(j = 1; j < BOARD_SIZE; ++j){    	/*check sintax and initiation*/
+				for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
 
 					if (validLoc((char)(currLoc->col + j), currLoc->row - j)
 							&& (board[(int)currLoc->col + j -97][currLoc->row - j -1] == EMPTY)){  /*check validation of the loc*/
 
 						tmpNewLoc.col = (char)(currLoc->col + j);
 						tmpNewLoc.row = currLoc->row - j;
-						addNewRegularStep(firstStep, tmpNewLoc);
+						addNewStep(firstStep, tmpNewLoc);
 					}
 					else{  /*do not continue to add new move from that loc*/
 						break;
@@ -1784,14 +2346,14 @@ void getRegularMove(char board[BOARD_SIZE][BOARD_SIZE], struct possibleMove* fir
 			}
 
 			else{  /*i = 3*/
-				for(j = 1; j < BOARD_SIZE; ++j){    	/*check sintax and initiation*/
+				for(j = 1; j < BOARD_SIZE; ++j){    	/*check syntax and initiation*/
 
 					if (validLoc((char)(currLoc->col - j), currLoc->row - j)
 							&& (board[(int)currLoc->col - j -97][currLoc->row - j -1] == EMPTY)){  /*check validation of the loc*/
 
 						tmpNewLoc.col = (char)(currLoc->col - j);
 						tmpNewLoc.row = currLoc->row - j;
-						addNewRegularStep(firstStep, tmpNewLoc);
+						addNewStep(firstStep, tmpNewLoc);
 					}
 					else{  /*do not continue to add new move from that loc*/
 						break;
@@ -1813,12 +2375,12 @@ void getRegularMove(char board[BOARD_SIZE][BOARD_SIZE], struct possibleMove* fir
 
 		if ((validLoc((char)tmpNewLoc.col, tmpNewLoc.row)) && (board[tmpNewLoc.col-97][tmpNewLoc.row-1] == EMPTY)){   /*that step in the board and empty*/
 
-			addNewRegularStep(firstStep, tmpNewLoc);
+			addNewStep(firstStep, tmpNewLoc);
 		}
 
 		tmpNewLoc.col = (char) firstStep->move.curr.col - 1; /*-*/
 		if ((validLoc((char)tmpNewLoc.col, tmpNewLoc.row)) && (board[tmpNewLoc.col-97][tmpNewLoc.row-1] == EMPTY)){   /*that step in the board and empty*/
-			addNewRegularStep(firstStep, tmpNewLoc);
+			addNewStep(firstStep, tmpNewLoc);
 		}
 	}
 }
@@ -1826,34 +2388,7 @@ void getRegularMove(char board[BOARD_SIZE][BOARD_SIZE], struct possibleMove* fir
 
 
 
-void addNewRegularStep(struct possibleMove* firstStep, struct location loc){
 
-	struct possibleMove* newStep = NULL;
-	struct move* newMove = NULL;
-
-
-	newStep = (struct possibleMove*)malloc(sizeof(struct possibleMove));	/*in use with the linked list*/
-	if(!newStep){
-		perror_message("addNewRegularStep");
-		quit();
-	}
-	posMovInitiation(newStep);
-
-	newStep = copyPossibleMove(firstStep);
-	newMove = (struct move*)malloc(sizeof(struct move));					/*in use with the linked list*/
-	if(!newMove){
-		perror_message("addNewRegularStep");
-		quit();
-	}
-
-	moveInitiation(newMove);
-	newMove->curr = loc;   /*new move have the new Loc*/
-
-	newStep->move.next = newMove;   /*newStep have the new move*/
-
-	newStep->next = firstStep->next;  /*connect the newStep to the list*/
-	firstStep->next = newStep;
-}
 
 
 
@@ -1960,7 +2495,7 @@ struct location* kingCanEatFromLoc(char board[BOARD_SIZE][BOARD_SIZE], struct lo
 
 	if(goTo == 0)
 	{
-		for(i = 0; i < BOARD_SIZE; ++i){    	/*check sintax and initiation*/
+		for(i = 0; i < BOARD_SIZE; ++i){    	/*check syntax and initiation*/
 
 			if (validLoc((char)(loc->col + (i +1)), loc->row +(i+1))){  /*check validation of the loc*/
 
@@ -1980,7 +2515,7 @@ struct location* kingCanEatFromLoc(char board[BOARD_SIZE][BOARD_SIZE], struct lo
 
 	else if(goTo == 1)
 	{
-		for(i = 0; i < BOARD_SIZE; ++i){    	/*check sintax and initiation*/
+		for(i = 0; i < BOARD_SIZE; ++i){    	/*check syntax and initiation*/
 
 			if (validLoc((char)(loc->col -(i +1)), loc->row +(i+1))){  /*check validation of the loc*/
 
@@ -2000,7 +2535,7 @@ struct location* kingCanEatFromLoc(char board[BOARD_SIZE][BOARD_SIZE], struct lo
 
 	else if(goTo == 2)
 	{
-		for(i = 0; i < BOARD_SIZE; ++i){    	/*check sintax and initiation*/
+		for(i = 0; i < BOARD_SIZE; ++i){    	/*check syntax and initiation*/
 
 			if (validLoc((char)(loc->col +(i +1)), loc->row -(i+1))){  /*check validation of the loc*/
 
@@ -2019,7 +2554,7 @@ struct location* kingCanEatFromLoc(char board[BOARD_SIZE][BOARD_SIZE], struct lo
 	}
 	else 	/*goTo=3*/
 	{
-		for(i = 0; i < BOARD_SIZE; ++i){    	/*check sintax and initiation*/
+		for(i = 0; i < BOARD_SIZE; ++i){    	/*check syntax and initiation*/
 
 			if (validLoc((char)(loc->col -(i +1)), loc->row -(i+1))){  /*check validation of the loc*/
 
@@ -2259,9 +2794,280 @@ void getChildren(mmGS_t* fatherNode, possibleM_t* possibleMove, mmGS_t** array){
 	}
 }
 
+
+int isPlayer(char piece, int playerColor){  //return 1 if the piece belong to the player. playerColor 0 -> white, 1 -> black
+	int res;
+
+	switch (playerColor){
+		case 0:    /*white*/
+			switch(piece){
+			case WHITE_P :
+			case WHITE_B :
+			case WHITE_N :
+			case WHITE_R :
+			case WHITE_Q :
+			case WHITE_K :
+				res = 1;
+				break;
+			default:
+					res = 0;
+					break;
+			}
+			break;
+
+		case 1:    /*black*/
+			switch(piece){
+			case BLACK_P :
+			case BLACK_B :
+			case BLACK_N :
+			case BLACK_R :
+			case BLACK_Q :
+			case BLACK_K :
+				res = 1;
+				break;
+			default:
+					res = 0;
+					break;
+			}
+			break;
+
+		default:
+			res  = -1; //if we got here, something went wrong
+			break;
+	}
+	return res;
+}
+
+int isOtherPlayer(char piece, int playerColor){  //return 1 if the piece belong to the *other player*. playerColor 0 -> white, 1 -> black
+	int res;
+
+	switch (playerColor){
+		case 0:    /*white*/
+			switch(piece){
+				case BLACK_P :
+				case BLACK_B :
+				case BLACK_N :
+				case BLACK_R :
+				case BLACK_Q :
+				case BLACK_K :
+					res = 1;
+					break;
+				default:
+					res = 0;
+					break;
+			}
+			break;
+
+		case 1:    /*black*/
+			switch(piece){
+				case WHITE_P :
+				case WHITE_B :
+				case WHITE_N :
+				case WHITE_R :
+				case WHITE_Q :
+				case WHITE_K :
+					res = 1;
+					break;
+				default:
+					res = 0;
+					break;
+			}
+			break;
+
+		default:
+			res  = -1; //if we got here, something went wrong
+			break;
+	}
+	return res;
+}
+
+
+
+int isWhite(char piece){
+
+	int res;
+
+	switch(piece){
+
+		case WHITE_P :
+		case WHITE_B :
+		case WHITE_N :
+		case WHITE_R :
+		case WHITE_Q :
+		case WHITE_K :
+			res = 1;
+			break;
+
+		default:
+			res = 0;
+			break;
+	}
+
+	return res;
+
+}
+
+
+
+int isBlack(char piece){
+
+	int res;
+
+	switch(piece){
+
+		case BLACK_P :
+		case BLACK_B :
+		case BLACK_N :
+		case BLACK_R :
+		case BLACK_Q :
+		case BLACK_K :
+			res = 1;
+			break;
+
+		default:
+			res = 0;
+			break;
+	}
+
+	return res;
+}
+
+
+int isPawn(char piece){
+
+	int res;
+
+	switch(piece){
+
+		case WHITE_P :
+		case BLACK_P :
+			res = 1;
+			break;
+
+		default :
+			res = 0;
+			break;
+	}
+
+	return res;
+}
+
+
+int isBishop(char piece){
+
+	int res;
+
+	switch(piece){
+
+		case WHITE_B :
+		case BLACK_B :
+			res = 1;
+			break;
+
+		default :
+			res = 0;
+			break;
+	}
+
+	return res;
+}
+
+
+
+int isRook(char piece){
+
+	int res;
+
+	switch(piece){
+
+		case WHITE_R :
+		case BLACK_R :
+			res = 1;
+			break;
+
+		default :
+			res = 0;
+			break;
+	}
+
+	return res;
+}
+
+
+
+int isKnight(char piece){
+
+	int res;
+
+	switch(piece){
+
+		case WHITE_N :
+		case BLACK_N :
+			res = 1;
+			break;
+
+		default :
+			res = 0;
+			break;
+	}
+
+	return res;
+}
+
+
+
+int isQueen(char piece){
+
+	int res;
+
+	switch(piece){
+
+		case WHITE_Q :
+		case BLACK_Q :
+			res = 1;
+			break;
+
+		default :
+			res = 0;
+			break;
+	}
+
+	return res;
+}
+
+
+
+int isKing(char piece){
+
+	int res;
+
+	switch(piece){
+
+		case WHITE_K :
+		case BLACK_K :
+			res = 1;
+			break;
+
+		default :
+			res = 0;
+			break;
+	}
+
+	return res;
+}
+
+int getPlayerColor(int player){ /*if white - will return 0. black - 1*/
+
+	if (player == whitePlayer){
+		return 0;
+	}
+
+	return 1;
+}
+
 void freeMT(move_t* move){
 	move_t* tmpMove = 0;
-	
+
 	tmpMove = move->next;
 	if (tmpMove == NULL){
 		free(move);
@@ -2310,6 +3116,7 @@ void initArrChar(char* charArray, int len){
 void moveInitiation(move_t* move){
 	move->next = NULL;
 	locInitiation(&(move->curr));
+	move->castling = 0;
 }
 
 void locInitiation(loc_t* loc){
@@ -2319,8 +3126,8 @@ void locInitiation(loc_t* loc){
 
 void posMovInitiation(struct possibleMove* firstEmptyNode){
 	moveInitiation(&(firstEmptyNode->move));
-	firstEmptyNode->eatCnt = 0;
-	firstEmptyNode->next = 0;
+	firstEmptyNode->check = 0;
+	firstEmptyNode->next = NULL;
 }
 void mmGSArrayInit(mmGS_t** array , int len){
 	int i;
