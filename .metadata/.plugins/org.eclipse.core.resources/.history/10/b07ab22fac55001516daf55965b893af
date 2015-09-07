@@ -23,7 +23,7 @@ typedef struct xml_file_data xml_t;
 
 xml_t* exctruct_xml_file(char* slot, ){
 	xml_t* xml_data_file = NULL;
-	FILE * input_file = NULL;
+	File * input_file = NULL;
 	char line[];
 	int line_contains_enum = 0, i = 0;
 
