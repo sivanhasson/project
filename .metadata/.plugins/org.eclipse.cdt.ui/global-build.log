@@ -1,0 +1,70 @@
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+make: *** No rule to make target `sdl_test.c', needed by `sdl_test.o'.  Stop.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project ProjectFolder ****
+
+make all 
+make: *** No rule to make target `all'.  Stop.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: *** No rule to make target `all'.  Stop.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+make: *** No rule to make target `sdl_test.c', needed by `sdl_test.o'.  Stop.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project ProjectFolder ****
+
+make all 
+make: *** No rule to make target `all'.  Stop.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: *** No rule to make target `all'.  Stop.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+make: *** No rule to make target `sdl_test.c', needed by `sdl_test.o'.  Stop.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project ProjectFolder ****
+
+make all 
+make: *** No rule to make target `all'.  Stop.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: *** No rule to make target `all'.  Stop.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+make: *** No rule to make target `sdl_test.c', needed by `sdl_test.o'.  Stop.
+
+**** Build Finished ****

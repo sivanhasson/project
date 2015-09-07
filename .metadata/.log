@@ -1,0 +1,21 @@
+!SESSION 2015-08-26 09:43:00.342 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_35
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 1 0 2015-08-26 09:52:18.358
+!MESSAGE Indexed 'ProjectFolder' (1 sources, 44 headers) in 2.89 sec: 1,412 declarations; 1,800 references; 3 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+!SESSION 2015-09-07 08:49:12.794 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_35
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 1 0 2015-09-07 08:50:37.512
+!MESSAGE Indexed 'chessProject' (1 sources, 148 headers) in 13.94 sec: 10,244 declarations; 15,479 references; 0 unresolved inclusions; 7 syntax errors; 71 unresolved names (0.28%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2015-09-07 09:13:58.860
+!MESSAGE Indexed 'projectChess' (1 sources, 44 headers) in 0.87 sec: 1,412 declarations; 1,800 references; 3 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;ProjectFolder/src/ProjectFolder.c&apos; to &apos;Chess.c&apos;" description="Rename resource &apos;ProjectFolder.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/ProjectFolder.c" name="Chess.c" stamp="1440608570186" updateReferences="true"/>
+</session>

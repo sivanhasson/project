@@ -1,0 +1,19 @@
+/*
+ * xml_operator.c
+ *
+ *  Created on: Sep 7, 2015
+ *      Author: sivan
+ */
+
+#include <stdio.h>
+
+#define BUFFSIZE 100;
+
+char* file_scanner(char* slot){
+
+	File* input_file = NULL;
+	input_file = fopen("projext_file_name/xml_files/" + slot);
+	while(fscanf()){
+
+	}
+}

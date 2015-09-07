@@ -1,0 +1,22 @@
+/*
+ * xml_operator.c
+ *
+ *  Created on: Sep 7, 2015
+ *      Author: sivan
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ONE_LINE 100;
+
+char* file_scanner(char* slot){
+	File * input_file = NULL;
+	char line[];
+
+	input_file = fopen("projext_file_name/xml_files/" + slot, "r");
+	line = fscanf(input_file, "\n%s", );
+	while( line != EOF){
+
+	}
+}
