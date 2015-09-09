@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+enum possible_windows {main_menu, player_selection_window, load_menu, setting_window, board_setting,
+		add_piece, remove_piece, move_piece, game_window};
+
+enum possible_windows  Current_window = NULL;
+
+struct controler{
+
+};
+
+typedef struct controler controler_t;
+
+controler_t * create_window()
+
+controler_t * create_panel()
+
+controler_t * create_label()
+
+controler_t * create_image()
+
+controler_t * create_button()
+
+
+enum control_type= {...}
+
+
+
+
+
+
+/*
+struct ui_tree{}
+
+
+#define struct ui_tree ui_tree_t
+
+
+ui_tree_t * UiTreeBuilder(possible_windows){
+	switch(possible_windows)
+
+	return ui_tree_t of the specific possible_windows
+}
+
+
+struct ui_tree_node{}
+
+
+#define struct ui_tree_node ui_tree_node_t
+
+*/

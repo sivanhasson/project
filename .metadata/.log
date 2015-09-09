@@ -19,3 +19,59 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64
 
 !ENTRY org.eclipse.cdt.core 1 0 2015-09-07 09:13:58.860
 !MESSAGE Indexed 'projectChess' (1 sources, 44 headers) in 0.87 sec: 1,412 declarations; 1,800 references; 3 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY org.eclipse.cdt.debug.core 4 105 2015-09-09 08:18:14.562
+!MESSAGE A program file was not specified in the launch configuration.
+
+!ENTRY org.eclipse.cdt.debug.core 4 105 2015-09-09 08:19:36.975
+!MESSAGE A program file was not specified in the launch configuration.
+
+!ENTRY org.eclipse.cdt.debug.core 4 105 2015-09-09 08:24:15.723
+!MESSAGE A program file was not specified in the launch configuration.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 103 2015-09-09 08:26:18.209
+!MESSAGE Program file does not exist
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 103 2015-09-09 08:26:18.209
+!MESSAGE 
+
+!ENTRY org.eclipse.cdt.debug.core 4 105 2015-09-09 08:29:00.904
+!MESSAGE A program file was not specified in the launch configuration.
+
+!ENTRY org.eclipse.cdt.debug.core 4 105 2015-09-09 08:30:22.975
+!MESSAGE A program file was not specified in the launch configuration.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 103 2015-09-09 08:32:09.510
+!MESSAGE Program file does not exist
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 103 2015-09-09 08:32:09.510
+!MESSAGE 
+
+!ENTRY org.eclipse.cdt.debug.core 4 105 2015-09-09 08:35:42.772
+!MESSAGE A program file was not specified in the launch configuration.
+
+!ENTRY org.eclipse.cdt.debug.core 4 104 2015-09-09 09:10:01.414
+!MESSAGE The program file specified in the launch configuration does not exist
+!STACK 0
+java.io.FileNotFoundException: /home/sivan/workspace/project/projectChess/src/sdl_test not found
+	at org.eclipse.cdt.debug.core.CDebugUtils.verifyProgramPath(CDebugUtils.java:653)
+	at org.eclipse.cdt.debug.core.CDebugUtils.verifyProgramPath(CDebugUtils.java:669)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.runLocalApplication(LocalCDILaunchDelegate.java:84)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.launch(LocalCDILaunchDelegate.java:70)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:854)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:703)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:937)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1141)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.cdt.debug.core 4 104 2015-09-09 11:03:58.003
+!MESSAGE The program file specified in the launch configuration does not exist
+!STACK 0
+java.io.FileNotFoundException: /home/sivan/workspace/project/projectChess/src/try not found
+	at org.eclipse.cdt.debug.core.CDebugUtils.verifyProgramPath(CDebugUtils.java:653)
+	at org.eclipse.cdt.debug.core.CDebugUtils.verifyProgramPath(CDebugUtils.java:669)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.runLocalApplication(LocalCDILaunchDelegate.java:84)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.launch(LocalCDILaunchDelegate.java:70)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:854)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:703)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:937)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1141)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)

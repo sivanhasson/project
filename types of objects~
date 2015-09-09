@@ -1,0 +1,33 @@
+Types:
+	1) SDL_Surface:
+		fildes: ->format->BitsPerPixel
+		creators: SDL_SetVideoMode, SDL_LoadBMP(char *file_name)
+
+		example: 
+			    /* Have a preference for 8-bit, but accept any depth */
+			    screen = SDL_SetVideoMode(640, 480, 8, SDL_SWSURFACE|SDL_ANYFORMAT);
+	2)SDL_Rect:
+
+
+Functions:
+	1)SDL_Surface* SDL_SetVideoMode(int width, int height, int bitsperpixel, Uint32 flags);
+		Flags:
+			SDL_HWSURFACE is set in 'flags', the video surface will be placed in
+			 * video memory, if possible, and you may have to call SDL_LockSurface()
+			 * in order to access the raw framebuffer.  Otherwise, the video surface
+			 * will be created in system memory
+		explanation:
+			http://sdl.beuc.net/sdl.wiki/SDL_SetVideoMode
+	2)int SDL_BlitSurface(SDL_Surface* src, const SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect)
+		explanations:
+			src = img to be copied on the srcrect
+			srcrect = rec that the src (img) will be copied to (const means the address &)
+			dst = the surface that the srcrect will be puted in
+			dstrect = 
+			https://wiki.libsdl.org/SDL_BlitSurface
+	3)int SDL_SetColors(SDL_Surface *surface, SDL_Color *colors, int firstcolor, int ncolors)
+		explanation:
+			https://www.libsdl.org/release/SDL-1.2.15/docs/html/sdlsetcolors.html
+	4) SDL_Delay(int milisec)
+		exp: Wait a specified number of milliseconds before returning
+	5)SDL_FreeSurface(SDL_FreeSurface* surface)

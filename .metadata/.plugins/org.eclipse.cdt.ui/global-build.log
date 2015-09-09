@@ -1,70 +1,40 @@
 
-**** Build of configuration Debug for project projectChess ****
+**** Clean-only build of configuration Debug for project projectChess ****
 
-make all 
-make: *** No rule to make target `sdl_test.c', needed by `sdl_test.o'.  Stop.
-
-**** Build Finished ****
-
-**** Build of configuration Debug for project ProjectFolder ****
-
-make all 
-make: *** No rule to make target `all'.  Stop.
-
-**** Build Finished ****
-
-**** Build of configuration Debug for project chessProject ****
-
-make all 
-make: *** No rule to make target `all'.  Stop.
+make clean 
+rm GUI.o GUI
+rm: cannot remove `GUI.o': No such file or directory
+rm: cannot remove `GUI': No such file or directory
+make: [clean] Error 1 (ignored)
 
 **** Build Finished ****
 
 **** Build of configuration Debug for project projectChess ****
 
 make all 
-make: *** No rule to make target `sdl_test.c', needed by `sdl_test.o'.  Stop.
-
-**** Build Finished ****
-
-**** Build of configuration Debug for project ProjectFolder ****
-
-make all 
-make: *** No rule to make target `all'.  Stop.
-
-**** Build Finished ****
-
-**** Build of configuration Debug for project chessProject ****
-
-make all 
-make: *** No rule to make target `all'.  Stop.
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm GUI.c `sdl-config --cflags`
+gcc  -o GUI GUI.o -lm -std=c99 -pedantic-errors -g `sdl-config --libs`
 
 **** Build Finished ****
 
 **** Build of configuration Debug for project projectChess ****
 
 make all 
-make: *** No rule to make target `sdl_test.c', needed by `sdl_test.o'.  Stop.
-
-**** Build Finished ****
-
-**** Build of configuration Debug for project ProjectFolder ****
-
-make all 
-make: *** No rule to make target `all'.  Stop.
-
-**** Build Finished ****
-
-**** Build of configuration Debug for project chessProject ****
-
-make all 
-make: *** No rule to make target `all'.  Stop.
+make: Nothing to be done for `all'.
 
 **** Build Finished ****
 
 **** Build of configuration Debug for project projectChess ****
 
 make all 
-make: *** No rule to make target `sdl_test.c', needed by `sdl_test.o'.  Stop.
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm GUI.c `sdl-config --cflags`
+gcc  -o GUI GUI.o -lm -std=c99 -pedantic-errors -g `sdl-config --libs`
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+make: Nothing to be done for `all'.
 
 **** Build Finished ****

@@ -2,6 +2,6 @@
 **** Build of configuration Debug for project projectChess ****
 
 make all 
-make: *** No rule to make target `sdl_test.c', needed by `sdl_test.o'.  Stop.
+make: Nothing to be done for `all'.
 
 **** Build Finished ****
