@@ -1,0 +1,34 @@
+#ifndef CONTROLLER_H_
+#define CONTROLLER_H_
+
+enum possible_windows {main_menu, player_selection_window, load_menu, setting_window, board_setting,
+		add_piece, remove_piece, move_piece, game_window};
+
+enum possible_windows Current_window;
+
+typedef enum {WINDOW, PANEL, IMAGE, BUTTON} controler_type;
+
+struct controler{
+	controler_type type;
+	SDL_Surface * surface;
+	SDL_Surface * parent;
+	int x,y;				/*location*/
+	int w,h;
+	SDL_Surface *src;
+	SDL_Rect srcRect;
+	SDL_Surface *dst;
+	SDL_Rect dstRect;	/*location relative to parent panel or window*/
+	int selected;
+};
+
+typedef struct controler controler_t;
+
+/*FUNCTIONS*/
+
+controler_t * create_controler(int x, int y, int w, int h, controler_type type);
+controler_t * create_window(SDL_Surface * surface, SDL_Surface * parent, SDL_Surface *src, SDL_Rect srcRect, SDL_Surface *dst, SDL_Rect dstRect);
+controler_t * create_panel();
+controler_t * create_image()
+controler_t * create_button();
+
+#endif /* CONTROLLER_H_ */

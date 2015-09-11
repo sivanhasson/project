@@ -1,10 +1,10 @@
-all: GUI
+all: controllers
 
 clean:
-	-rm GUI.o GUI
+	-rm controllers.o controllers
 
-GUI: GUI.o
-	gcc  -o GUI GUI.o -lm -std=c99 -pedantic-errors -g `sdl-config --libs`
+controllers: controllers.o
+	gcc  -o controllers controllers.o -lm -std=c99 -pedantic-errors -g `sdl-config --libs`
 
-GUI.o: GUI.c
-	gcc  -std=c99 -pedantic-errors -c -Wall -g -lm GUI.c `sdl-config --cflags`
+controllers.o: controllers.c
+	gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`

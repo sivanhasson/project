@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <SDL.h>
+#include <SDL_video.h>
+#include "controllers.h"
+
+
+
+/*constructing controllers*/
+
+controler_t * create_base_controler(int x, int y, int w, int h, controler_type type);
+	controller_t * baseController = malloc(sizeof(controller_t));
+	if (baseController == NULL){
+		printf("error alloacting baseController");
+	}
+	return baseController;
+}
+
+controller_t * create_window(){
+	controller_t *w = NULL;
+	SDL_WM_SetCaption("Sivan","Hasson");
+	w->surface = SDL_SetVideoMode(640,480,0,0);
+	return w;
+}
+
+controller_t * create_image()
+
+controller_t * create_button()
+
+
+
+int main(void) {
+
+	/* Initialize SDL and make sure it quits*/
+	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+		printf("ERROR: unable to init SDL: %s\n", SDL_GetError());
+		return 1;
+	}
+	atexit(SDL_Quit);
+
+	controller_t *w = create_window();
+
+	/* We finished drawing*/
+	if (SDL_Flip(w->surface) != 0) {
+		printf("ERROR: failed to flip buffer: %s\n", SDL_GetError());
+	}
+
+	/* Wait a little before closing*/
+	SDL_Delay(2000);
+
+	return 0;
+}
+
+
+
+
+/*
+struct ui_tree{}
+
+
+#define struct ui_tree ui_tree_t
+
+
+ui_tree_t * UiTreeBuilder(possible_windows){
+	switch(possible_windows)
+
+	return ui_tree_t of the specific possible_windows
+}
+
+
+struct ui_tree_node{}
+
+
+#define struct ui_tree_node ui_tree_node_t
+
+*/

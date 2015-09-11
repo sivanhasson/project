@@ -6,3 +6,7 @@
 1441820916918	Move 1 resources to 'projectChess'
 1441820948572	Move 1 resources to 'temp_for_try'
 1441829642652	Move 1 resources to 'temp'
+1441965735236	Rename resource 'GUI.c'
+1441965765525	Rename resource 'GUI.h'
+1441965996963	Rename resource 'controlers.c'
+1441966008075	Rename resource 'controlers.h'

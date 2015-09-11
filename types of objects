@@ -25,9 +25,13 @@ Functions:
 			dst = the surface that the srcrect will be puted in
 			dstrect = 
 			https://wiki.libsdl.org/SDL_BlitSurface
+
 	3)int SDL_SetColors(SDL_Surface *surface, SDL_Color *colors, int firstcolor, int ncolors)
 		explanation:
 			https://www.libsdl.org/release/SDL-1.2.15/docs/html/sdlsetcolors.html
 	4) SDL_Delay(int milisec)
 		exp: Wait a specified number of milliseconds before returning
 	5)SDL_FreeSurface(SDL_FreeSurface* surface)
+	6)SDL_SetVideoMode(int width, int height, int bpp, Uint32 flags)
+	  explanation:
+		https://www.libsdl.org/release/SDL-1.2.15/docs/html/sdlsetvideomode.html

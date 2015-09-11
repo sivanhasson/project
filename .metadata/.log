@@ -75,3 +75,59 @@ java.io.FileNotFoundException: /home/sivan/workspace/project/projectChess/src/tr
 	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:937)
 	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1141)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.help.base 4 0 2015-09-11 07:36:17.556
+!MESSAGE Errors while indexing
+!STACK 0
+java.lang.IllegalArgumentException: invalid format: 
+	at org.osgi.framework.Version.<init>(Version.java:150)
+	at org.eclipse.help.internal.search.SearchIndex.isLuceneCompatible(SearchIndex.java:721)
+	at org.eclipse.help.internal.search.PluginIndex.isCompatible(PluginIndex.java:152)
+	at org.eclipse.help.internal.search.PluginIndex.resolve(PluginIndex.java:83)
+	at org.eclipse.help.internal.search.PluginIndex.getPaths(PluginIndex.java:231)
+	at org.eclipse.help.internal.search.PrebuiltIndexes.trim(PrebuiltIndexes.java:46)
+	at org.eclipse.help.internal.search.PrebuiltIndexes.getIndexes(PrebuiltIndexes.java:54)
+	at org.eclipse.help.internal.search.IndexingOperation.mergeIndexes(IndexingOperation.java:544)
+	at org.eclipse.help.internal.search.IndexingOperation.addNewDocuments(IndexingOperation.java:152)
+	at org.eclipse.help.internal.search.IndexingOperation.execute(IndexingOperation.java:106)
+	at org.eclipse.help.internal.search.LocalSearchManager.updateIndex(LocalSearchManager.java:671)
+	at org.eclipse.help.internal.search.LocalSearchManager.ensureIndexUpdated(LocalSearchManager.java:645)
+	at org.eclipse.help.internal.search.federated.IndexerJob.run(IndexerJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.util.NoSuchElementException
+	at java.util.StringTokenizer.nextToken(StringTokenizer.java:349)
+	at org.osgi.framework.Version.<init>(Version.java:127)
+	... 13 more
+
+!ENTRY org.eclipse.core.jobs 4 2 2015-09-11 07:36:26.533
+!MESSAGE An internal error occurred during: "Local Help".
+!STACK 0
+java.lang.IllegalArgumentException: invalid format: 
+	at org.osgi.framework.Version.<init>(Version.java:150)
+	at org.eclipse.help.internal.search.SearchIndex.isLuceneCompatible(SearchIndex.java:721)
+	at org.eclipse.help.internal.search.PluginIndex.isCompatible(PluginIndex.java:152)
+	at org.eclipse.help.internal.search.PluginIndex.resolve(PluginIndex.java:83)
+	at org.eclipse.help.internal.search.PluginIndex.getPaths(PluginIndex.java:231)
+	at org.eclipse.help.internal.search.PrebuiltIndexes.trim(PrebuiltIndexes.java:46)
+	at org.eclipse.help.internal.search.PrebuiltIndexes.getIndexes(PrebuiltIndexes.java:54)
+	at org.eclipse.help.internal.search.IndexingOperation.mergeIndexes(IndexingOperation.java:544)
+	at org.eclipse.help.internal.search.IndexingOperation.addNewDocuments(IndexingOperation.java:152)
+	at org.eclipse.help.internal.search.IndexingOperation.execute(IndexingOperation.java:106)
+	at org.eclipse.help.internal.search.LocalSearchManager.updateIndex(LocalSearchManager.java:671)
+	at org.eclipse.help.internal.search.LocalSearchManager.ensureIndexUpdated(LocalSearchManager.java:645)
+	at org.eclipse.help.internal.search.LocalSearchManager.search(LocalSearchManager.java:590)
+	at org.eclipse.help.internal.search.SearchManager.searchLocal(SearchManager.java:103)
+	at org.eclipse.help.internal.search.SearchManager.search(SearchManager.java:94)
+	at org.eclipse.help.internal.search.federated.LocalHelp.run(LocalHelp.java:81)
+	at org.eclipse.help.internal.search.federated.FederatedSearchJob.run(FederatedSearchJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.util.NoSuchElementException
+	at java.util.StringTokenizer.nextToken(StringTokenizer.java:349)
+	at org.osgi.framework.Version.<init>(Version.java:127)
+	... 17 more
+
+!ENTRY org.eclipse.cdt.core 1 0 2015-09-11 07:43:52.494
+!MESSAGE Indexed 'try' (1 sources, 44 headers) in 0.76 sec: 1,412 declarations; 1,800 references; 3 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2015-09-11 07:44:54.350
+!MESSAGE Indexed 'try' (1 sources, 44 headers) in 0.41 sec: 1,412 declarations; 1,800 references; 3 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)

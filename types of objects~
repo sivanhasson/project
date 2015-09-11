@@ -21,7 +21,7 @@ Functions:
 	2)int SDL_BlitSurface(SDL_Surface* src, const SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect)
 		explanations:
 			src = img to be copied on the srcrect
-			srcrect = rec that the src (img) will be copied to (const means the address &)
+			srcrect = rec that the src (img) will be copied to (entered has a pointer using &)
 			dst = the surface that the srcrect will be puted in
 			dstrect = 
 			https://wiki.libsdl.org/SDL_BlitSurface

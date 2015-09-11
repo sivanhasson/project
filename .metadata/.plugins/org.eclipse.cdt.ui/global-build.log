@@ -3,21 +3,10 @@
 
 make clean 
 rm GUI.o GUI
-rm: cannot remove `GUI.o': No such file or directory
-rm: cannot remove `GUI': No such file or directory
-make: [clean] Error 1 (ignored)
 
 **** Build Finished ****
 
-**** Build of configuration Debug for project projectChess ****
-
-make all 
-gcc  -std=c99 -pedantic-errors -c -Wall -g -lm GUI.c `sdl-config --cflags`
-gcc  -o GUI GUI.o -lm -std=c99 -pedantic-errors -g `sdl-config --libs`
-
-**** Build Finished ****
-
-**** Build of configuration Debug for project projectChess ****
+**** Build of configuration Debug for project chessProject ****
 
 make all 
 make: Nothing to be done for `all'.
@@ -27,14 +16,534 @@ make: Nothing to be done for `all'.
 **** Build of configuration Debug for project projectChess ****
 
 make all 
-gcc  -std=c99 -pedantic-errors -c -Wall -g -lm GUI.c `sdl-config --cflags`
-gcc  -o GUI GUI.o -lm -std=c99 -pedantic-errors -g `sdl-config --libs`
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+In file included from controllers.c:4:0:
+controllers.h:24:26: error: conflicting types for ‘controler_t’
+controllers.h:9:45: note: previous declaration of ‘controler_t’ was here
+controllers.c: In function ‘create_image’:
+controllers.c:10:1: error: unknown type name ‘controller_t’
+controllers.c:10:34: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:14:1: error: unknown type name ‘controller_t’
+controllers.c:14:31: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:21:1: error: unknown type name ‘controller_t’
+controllers.c:23:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘controller_t’
+controllers.h:31:15: error: declaration for parameter ‘create_button’ but no such parameter
+controllers.c:47:1: error: expected ‘{’ at end of input
+controllers.c:47:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
 
 **** Build Finished ****
 
 **** Build of configuration Debug for project projectChess ****
 
 make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+In file included from controllers.c:4:0:
+controllers.h:12:2: error: unknown type name ‘controler_t’
+controllers.c: In function ‘create_image’:
+controllers.c:10:1: error: unknown type name ‘controller_t’
+controllers.c:10:34: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:14:1: error: unknown type name ‘controller_t’
+controllers.c:14:31: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:21:1: error: unknown type name ‘controller_t’
+controllers.c:23:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘controller_t’
+controllers.h:32:15: error: declaration for parameter ‘create_button’ but no such parameter
+controllers.c:47:1: error: expected ‘{’ at end of input
+controllers.c:47:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
 make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_image’:
+controllers.c:10:1: error: unknown type name ‘controller_t’
+controllers.c:10:34: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:14:1: error: unknown type name ‘controller_t’
+controllers.c:14:31: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:21:1: error: unknown type name ‘controller_t’
+controllers.c:23:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘controller_t’
+controllers.h:32:15: error: declaration for parameter ‘create_button’ but no such parameter
+controllers.c:47:1: error: expected ‘{’ at end of input
+controllers.c:47:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_image’:
+controllers.c:10:1: error: unknown type name ‘controller_t’
+controllers.c:10:34: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:15:1: error: unknown type name ‘controller_t’
+controllers.c:15:31: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:22:1: error: unknown type name ‘controller_t’
+controllers.c:24:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘controller_t’
+controllers.h:32:15: error: declaration for parameter ‘create_button’ but no such parameter
+controllers.c:48:1: error: expected ‘{’ at end of input
+controllers.c:48:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_image’:
+controllers.c:11:2: error: unknown type name ‘controller_t’
+controllers.c:11:2: error: parameter ‘baseController’ is initialized
+controllers.c:11:48: error: ‘controller_t’ undeclared (first use in this function)
+controllers.c:11:48: note: each undeclared identifier is reported only once for each function it appears in
+controllers.c:12:2: error: expected declaration specifiers before ‘if’
+controllers.c:15:2: error: expected declaration specifiers before ‘return’
+controllers.c:16:1: error: expected declaration specifiers before ‘}’ token
+controllers.c:18:1: error: expected declaration specifiers before ‘controller_t’
+controllers.c:25:1: error: expected declaration specifiers before ‘controller_t’
+controllers.c:11:17: error: declaration for parameter ‘baseController’ but no such parameter
+controllers.c:10:15: error: declaration for parameter ‘create_base_controler’ but no such parameter
+controllers.h:32:15: error: declaration for parameter ‘create_button’ but no such parameter
+controllers.c:51:1: error: expected ‘{’ at end of input
+controllers.c:51:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_image’:
+controllers.c:11:2: error: unknown type name ‘controller_t’
+controllers.c:11:2: error: parameter ‘baseController’ is initialized
+controllers.c:11:48: error: ‘controller_t’ undeclared (first use in this function)
+controllers.c:11:48: note: each undeclared identifier is reported only once for each function it appears in
+controllers.c:12:2: error: expected declaration specifiers before ‘if’
+controllers.c:15:2: error: expected declaration specifiers before ‘return’
+controllers.c:16:1: error: expected declaration specifiers before ‘}’ token
+controllers.c:18:1: error: expected declaration specifiers before ‘controller_t’
+controllers.c:25:1: error: expected declaration specifiers before ‘controller_t’
+controllers.c:11:17: error: declaration for parameter ‘baseController’ but no such parameter
+controllers.c:10:15: error: declaration for parameter ‘create_base_controler’ but no such parameter
+controllers.h:32:15: error: declaration for parameter ‘create_button’ but no such parameter
+controllers.c:51:1: error: expected ‘{’ at end of input
+controllers.c:51:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_image’:
+controllers.c:8:84: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:16:1: error: unknown type name ‘controller_t’
+controllers.c:16:31: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:23:1: error: unknown type name ‘controller_t’
+controllers.c:25:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘controller_t’
+controllers.h:32:15: error: declaration for parameter ‘create_button’ but no such parameter
+controllers.c:49:1: error: expected ‘{’ at end of input
+controllers.c:49:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_image’:
+controllers.c:8:84: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:16:1: error: unknown type name ‘controller_t’
+controllers.c:16:31: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+controllers.c:23:1: error: unknown type name ‘controller_t’
+controllers.c:25:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘controller_t’
+controllers.h:32:15: error: declaration for parameter ‘create_button’ but no such parameter
+controllers.c:49:1: error: expected ‘{’ at end of input
+controllers.c:49:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c:8:1: error: unknown type name ‘controler_t’
+controllers.c:8:64: error: unknown type name ‘controler_type’
+controllers.c: In function ‘create_window’:
+controllers.c:16:1: error: number of arguments doesn’t match prototype
+controllers.h:29:16: error: prototype declaration
+controllers.c: In function ‘create_image’:
+controllers.c:29:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:49:1: error: expected ‘{’ at end of input
+controllers.c:49:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_window’:
+controllers.c:17:1: error: number of arguments doesn’t match prototype
+controllers.h:29:16: error: prototype declaration
+controllers.c: In function ‘create_image’:
+controllers.c:30:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:50:1: error: expected ‘{’ at end of input
+controllers.c:50:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_window’:
+controllers.c:18:16: error: ‘w’ redeclared as different kind of symbol
+controllers.c:17:34: note: previous definition of ‘w’ was here
+controllers.c: In function ‘create_image’:
+controllers.c:30:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:50:1: error: expected ‘{’ at end of input
+controllers.c:50:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_window’:
+controllers.c:19:7: error: comparison between pointer and integer
+controllers.c: In function ‘create_image’:
+controllers.c:36:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:56:1: error: expected ‘{’ at end of input
+controllers.c:56:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_window’:
+controllers.c:20:7: error: comparison between pointer and integer
+controllers.c: At top level:
+controllers.c:37:16: error: conflicting types for ‘create_panel’
+controllers.h:32:16: note: previous declaration of ‘create_panel’ was here
+controllers.c: In function ‘create_image’:
+controllers.c:47:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:67:1: error: expected ‘{’ at end of input
+controllers.c:67:1: warning: control reaches end of non-void function [-Wreturn-type]
+controllers.c: In function ‘create_panel’:
+controllers.c:39:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c:37:16: error: conflicting types for ‘create_panel’
+controllers.h:32:16: note: previous declaration of ‘create_panel’ was here
+controllers.c: In function ‘create_image’:
+controllers.c:47:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:67:1: error: expected ‘{’ at end of input
+controllers.c:67:1: warning: control reaches end of non-void function [-Wreturn-type]
+controllers.c: In function ‘create_panel’:
+controllers.c:39:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c:37:16: error: conflicting types for ‘create_panel’
+controllers.h:32:16: note: previous declaration of ‘create_panel’ was here
+controllers.c: In function ‘create_image’:
+controllers.c:49:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:69:1: error: expected ‘{’ at end of input
+controllers.c:69:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_panel’:
+controllers.c:38:47: error: ‘x’ undeclared (first use in this function)
+controllers.c:38:47: note: each undeclared identifier is reported only once for each function it appears in
+controllers.c:38:50: error: ‘y’ undeclared (first use in this function)
+controllers.c: In function ‘create_image’:
+controllers.c:49:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:69:1: error: expected ‘{’ at end of input
+controllers.c:69:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c:37:16: error: conflicting types for ‘create_panel’
+controllers.h:32:16: note: previous declaration of ‘create_panel’ was here
+controllers.c: In function ‘create_panel’:
+controllers.c:38:47: error: ‘x’ undeclared (first use in this function)
+controllers.c:38:47: note: each undeclared identifier is reported only once for each function it appears in
+controllers.c:38:50: error: ‘y’ undeclared (first use in this function)
+controllers.c: In function ‘create_image’:
+controllers.c:49:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:69:1: error: expected ‘{’ at end of input
+controllers.c:69:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_image’:
+controllers.c:49:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:69:1: error: expected ‘{’ at end of input
+controllers.c:69:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_panel’:
+controllers.c:43:2: error: too few arguments to function ‘SDL_CreateRGBSurface’
+/usr/include/SDL/SDL_video.h:553:39: note: declared here
+controllers.c: In function ‘create_image’:
+controllers.c:55:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:75:1: error: expected ‘{’ at end of input
+controllers.c:75:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_image’:
+controllers.c:55:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:75:1: error: expected ‘{’ at end of input
+controllers.c:75:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_panel’:
+controllers.c:48:57: error: ‘controller_t’ has no member named ‘format’
+controllers.c:50:3: error: break statement not within loop or switch
+controllers.c: In function ‘create_image’:
+controllers.c:62:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:82:1: error: expected ‘{’ at end of input
+controllers.c:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_panel’:
+controllers.c:50:3: error: break statement not within loop or switch
+controllers.c: In function ‘create_image’:
+controllers.c:62:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:82:1: error: expected ‘{’ at end of input
+controllers.c:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project chessProject ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project projectChess ****
+
+make all 
+gcc  -std=c99 -pedantic-errors -c -Wall -g -lm controllers.c `sdl-config --cflags`
+controllers.c: In function ‘create_image’:
+controllers.c:62:1: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘int’
+controllers.c:82:1: error: expected ‘{’ at end of input
+controllers.c:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+make: *** [controllers.o] Error 1
 
 **** Build Finished ****
